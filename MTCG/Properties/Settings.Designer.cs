@@ -26,11 +26,22 @@ namespace MTCG.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Host=ella.db.elephantsql.com;Database=ydfkbntp;Username=ydfkbntp;Password=hJvKH7X" +
-            "ewBsiQqZ5RtoT7lsNs6l80bm-")]
-        public string ydfkbntpConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Host=ella.db.elephantsql.com;Database=mtcg;Username=mtcg;Password=hJvKH7XewBsiQqZ" +
+            "5RtoT7lsNs6l80bm-")]
+        public string mtcgConnectionString {
             get {
-                return ((string)(this["ydfkbntpConnectionString"]));
+                return ((string)(this["mtcgConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Host=underline.akis.net;Database=mtcg;Username=underline;Password=underline;Persi" +
+            "st Security Info=True")]
+        public string mtcgConnectionString1 {
+            get {
+                return ((string)(this["mtcgConnectionString1"]));
             }
         }
     }

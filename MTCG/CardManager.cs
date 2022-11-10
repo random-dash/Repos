@@ -7,7 +7,7 @@ public class CardManager
 {
     //List of all cards
     private List<Card> GameCards = new List<Card>();
-    public ValueTuple<CardType, ElementType, string, int>[] AllCards()
+    /*public ValueTuple<CardType, ElementType, string, int>[] AllCards()
     {
         // ReSharper disable once HeapView.ObjectAllocation.Evident
         ValueTuple<CardType, ElementType, string, int>[] cards =
@@ -15,28 +15,28 @@ public class CardManager
 
             //Elemental
             //Monsters
-            (CardType.Monster, ElementType.Water, "Smogger", 10),
-            (CardType.Monster, ElementType.Water, "Sellemental", 20),
-            (CardType.Monster, ElementType.Water, "Cyclone", 30),
+            (CardType.Monster, ElementType.Water, "Dracle", 12),
+            (CardType.Monster, ElementType.Water, "Cympot", 20),
+            (CardType.Monster, ElementType.Water, "Basichea", 32),
             //Spells
-            (CardType.Spell, ElementType.Water, "Lil' Rag", 15),
-            (CardType.Spell, ElementType.Water, "Molten Rock", 25),
+            (CardType.Spell, ElementType.Water, "Hirbaun", 14),
+            (CardType.Spell, ElementType.Water, "Arulpu", 26),
             //Fire
             //Monsters
-            (CardType.Monster, ElementType.Fire, "Red Whelp", 10),
-            (CardType.Monster, ElementType.Fire, "Atramedes", 20),
-            (CardType.Monster, ElementType.Fire, "Kelcgos", 30),
+            (CardType.Monster, ElementType.Fire, "Gierion", 16),
+            (CardType.Monster, ElementType.Fire, "Wepire", 18),
+            (CardType.Monster, ElementType.Fire, "Eilez", 34),
             //Spells
-            (CardType.Spell, ElementType.Fire, "Tarecgosa", 15),
-            (CardType.Spell, ElementType.Fire, "Razorgor", 25),
+            (CardType.Spell, ElementType.Fire, "Yadorm", 20),
+            (CardType.Spell, ElementType.Fire, "Knuagd", 22),
             //Normal
             //Monsters
-            (CardType.Monster, ElementType.Normal, "Gambler", 10),
-            (CardType.Monster, ElementType.Normal, "Captain", 20),
-            (CardType.Monster, ElementType.Normal, "Looter", 30),
+            (CardType.Monster, ElementType.Normal, "Haihaod", 14),
+            (CardType.Monster, ElementType.Normal, "Tarasdraosk", 20),
+            (CardType.Monster, ElementType.Normal, "Bihue", 28),
             //Spells
-            (CardType.Spell, ElementType.Normal, "Eliza", 15),
-            (CardType.Spell, ElementType.Normal, "Two-Tusk", 25),
+            (CardType.Spell, ElementType.Normal, "Hardaan", 16),
+            (CardType.Spell, ElementType.Normal, "Sicio", 28),
 
         };
 
@@ -48,7 +48,7 @@ public class CardManager
     public void AddCardToDb(CardType cardType, ElementType elementType, string name, int damage)
     {
         UserSystem.UserSystem userSystem = new UserSystem.UserSystem();
-        var cmd = new NpgsqlCommand("INSERT INTO ydfkbntp.public.card_collection (card_name, card_type, card_element_type, card_damage) VALUES (@cardname, @cardtype, @elementtype, @carddamage)", userSystem._conn);
+        var cmd = new NpgsqlCommand("INSERT INTO mtcg.public.card_collection (card_name, card_type, card_element_type, card_damage) VALUES (@cardname, @cardtype, @elementtype, @carddamage)", userSystem._conn);
         
         // ReSharper disable HeapView.BoxingAllocation
         cmd.Parameters.Add(new NpgsqlParameter("cardname", name));
@@ -60,13 +60,13 @@ public class CardManager
         cmd.ExecuteNonQuery();
         //close connection
         userSystem._conn.Close();
-    }
+    }*/
 
     //load all cards from DB to GameCards using Type and Element
     public void LoadCardsFromDb()
     {
         UserSystem.UserSystem userSystem = new UserSystem.UserSystem();
-        var cmd = new NpgsqlCommand("SELECT * FROM ydfkbntp.public.card_collection", userSystem._conn);
+        var cmd = new NpgsqlCommand("SELECT * FROM mtcg.public.card_collection", userSystem._conn);
         var reader = cmd.ExecuteReader();
         while (reader.Read())
         {
@@ -98,12 +98,12 @@ public class CardManager
         return GameCards;
     }
 
-    internal void uploadAllCards()
+    /*internal void uploadAllCards()
     {
         foreach (var card in AllCards())
         {
             AddCardToDb(card.Item1, card.Item2, card.Item3, card.Item4);
         }
-    }
+    }*/
 }
 

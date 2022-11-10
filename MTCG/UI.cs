@@ -5,7 +5,14 @@ namespace MTCG
     public class UI
     {
         private string choice;
-        public void Menu(User player)
+
+        //constructor
+        public UI(User player)
+        {
+            MainMenu(player);
+        }
+
+        public void MainMenu(User player)
         {
             UserSystem.UserSystem userSystem = new UserSystem.UserSystem();
             Console.WriteLine("Welcome to Monster Trade Card Game!\n");
@@ -59,6 +66,19 @@ namespace MTCG
                 }
             } while (choice != "l" || choice != "r");
 
+        }
+
+        //Ingame Menu
+        public char IngameMenu(User player)
+        {
+            Console.WriteLine("Welcome to the Ingame Menu!\n");
+            Console.WriteLine("What do you want to do?");
+            Console.WriteLine("(b)uy a pack");
+            Console.WriteLine("(a)rena");
+            Console.WriteLine("(s)tack");
+            Console.WriteLine("(e)xit");
+            choice = Console.ReadLine();
+            return choice[0];
         }
 
 

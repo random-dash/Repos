@@ -9,9 +9,7 @@ namespace UserSystem
     public class UserSystem
     {
         //Connect to ElephantSQL
-        private readonly string _connectionString = "Host=ella.db.elephantsql.com;Username=ydfkbntp;Password=hJvKH7XewBsiQqZ5RtoT7lsNs6l80bm-;Database=ydfkbntp";
-        //private readonly string _connectionString = "Host=172.17.0.3;Username=postgres;Password=postrges;Database=mtcg";
-        //private readonly string _connectionString = "Host=localhost;Username=postgres;Password=postgres;Database=mtcg";
+        private readonly string _connectionString = "Host=185.65.234.37;Username=underline;Password=underline;Database=mtcg";
         public NpgsqlConnection _conn;
         public UserSystem()
         {
@@ -22,7 +20,7 @@ namespace UserSystem
         public void register(string uname, string pwd)
         {
             //Insert user into database
-            var cmd = new NpgsqlCommand("INSERT INTO ydfkbntp.public.user (username, password) VALUES (@username, @password)", _conn);
+            var cmd = new NpgsqlCommand("INSERT INTO mtcg.public.user (user_name, user_password) VALUES (@username, @password)", _conn);
             cmd.Parameters.Add(new NpgsqlParameter("username", uname));
             cmd.Parameters.Add(new NpgsqlParameter("password", pwd));
             cmd.Prepare();
@@ -33,30 +31,29 @@ namespace UserSystem
         {
             _conn.Open();
 
-            var cmd = new NpgsqlCommand("SELECT * FROM ydfkbntp.public.user WHERE username=@username", _conn);
+            var cmd = new NpgsqlCommand("SELECT * FROM mtcg.public.user WHERE user_name=@username", _conn);
             cmd.Parameters.Add(new NpgsqlParameter("username", player.username));
             cmd.Prepare();
             var reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                player.userid = (int)reader["userID"];
-                player.username = (string)reader["username"];
-                player.passwd = (string)reader["user_pwd"];
-                player.Coins = (int)reader["coins"];
-                player.Points = (int)reader["ELO"];
+                player.userid = (int)reader["user_ID"];
+                player.username = (string)reader["user_name"];
+                player.passwd = (string)reader["user_password"];
+                player.Coins = (int)reader["user_coins"];
+                player.Points = (int)reader["user_ELO"];
             }
             _conn.Close();
         }
 
         public bool UserExists(string uname)
         {
-            var cmd = new NpgsqlCommand("SELECT * FROM ydfkbntp.public.user WHERE username=@username", _conn);
+            var cmd = new NpgsqlCommand("SELECT * FROM mtcg.public.user WHERE user_name=@username", _conn);
             cmd.Parameters.Add(new NpgsqlParameter("username", uname));
             cmd.Prepare();
             var reader = cmd.ExecuteReader();
             return reader.Read();
         }
-        
 
     }
 }
