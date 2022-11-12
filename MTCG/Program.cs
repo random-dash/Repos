@@ -7,10 +7,8 @@ namespace MTCG
     {
         public static void Main(string[] args)
         {
-            string[] strings = { "Hello", "World", "!" };
-            Serverr.Server server = new Serverr.Server();
-            Serverr.Server.Main(strings).GetAwaiter().OnCompleted(() => Console.WriteLine("Server started"));
-            /*CardManager cardManager = new CardManager();
+            
+            CardManager cardManager = new CardManager();
             //cardManager.uploadAllCards();
             cardManager.LoadCardsFromDb();
             cardManager.PrintCards();
@@ -25,7 +23,7 @@ namespace MTCG
             //player.BuyPack(cardManager.AllCards());
             //player.Arena(player.Stack);
             //Console.WriteLine(player.Stack.Monsters() + " " + player.Stack.Spells());
-            */
+            
         }
     }
 }
