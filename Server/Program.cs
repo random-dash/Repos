@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Sockets;
 using System.Net;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Net.Sockets;
 using System.Threading;
-
+using System.Net.NetworkInformation;
 
 namespace Server
 {
@@ -17,20 +12,34 @@ namespace Server
     {
         static async Task Main(string[] args)
         {
-            TcpListener listener = new TcpListener(IPAddress.Loopback, 8000);
-            listener.Start(5);
+            //Create Thread whenever a new client connects
+            TcpListener server = new TcpListener(IPAddress.Any, 10001);
+            server.Start();
+            Console.WriteLine("Server running");
+            while (true)
+            {
+                TcpClient client = await server.AcceptTcpClientAsync();
+                //Await Thread to finish
+                Thread thread = new(() => HandleClient(client));
+                thread.Start();
+            }
 
-            Console.CancelKeyPress += (sender, e) => Environment.Exit(0);
+        }
 
+        public static void HandleClient(TcpClient client)
+        {
             while (true)
             {
                 try
                 {
-                    var socket = await listener.AcceptTcpClientAsync();
-                    using var writer = new StreamWriter(socket.GetStream()) { AutoFlush = true };
+                    using var writer = new StreamWriter(client.GetStream()) { AutoFlush = true };
+                    long result = IPGlobalProperties.GetIPGlobalProperties()
+                                    .GetTcpIPv4Statistics()
+                                    .CurrentConnections;
                     writer.WriteLine("Welcome to the Arena!");
+                    writer.WriteLine("Calmy chill in the Lobby with " + result + " others.");
 
-                    using var reader = new StreamReader(socket.GetStream());
+                    using var reader = new StreamReader(client.GetStream());
                     string message;
                     do
                     {
@@ -41,6 +50,7 @@ namespace Server
                 catch (Exception exc)
                 {
                     Console.WriteLine("error occurred: " + exc.Message);
+                    break;
                 }
             }
         }

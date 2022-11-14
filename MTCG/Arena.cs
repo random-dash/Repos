@@ -20,7 +20,7 @@ namespace MTCG
 
         public void ConnectToServer(User player)
         {
-            Thread.Sleep(2000); // 2 sec so the server is up and running
+            //Thread.Sleep(2000); // 2 sec so the server is up and running
 
             using TcpClient client = new TcpClient("localhost", 8000);
             using StreamReader reader = new StreamReader(client.GetStream());
