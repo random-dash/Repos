@@ -4,8 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Sockets;
+using System.Threading;
+
 
 namespace Server
 {
@@ -17,7 +21,6 @@ namespace Server
             listener.Start(5);
 
             Console.CancelKeyPress += (sender, e) => Environment.Exit(0);
-            Console.WriteLine("Server started");
 
             while (true)
             {
@@ -25,8 +28,7 @@ namespace Server
                 {
                     var socket = await listener.AcceptTcpClientAsync();
                     using var writer = new StreamWriter(socket.GetStream()) { AutoFlush = true };
-                    writer.WriteLine("Welcome to myserver!");
-                    writer.WriteLine("Please enter your commands...");
+                    writer.WriteLine("Welcome to the Arena!");
 
                     using var reader = new StreamReader(socket.GetStream());
                     string message;

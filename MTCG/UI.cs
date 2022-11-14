@@ -122,6 +122,7 @@ namespace MTCG
 
         public void ArenaMenu(User player, CardManager cardManager)
         {
+            Arena arena = new Arena();
             string Achoice = "";
             do
             {
@@ -135,9 +136,12 @@ namespace MTCG
                 //TODO : Search for an opponent or exit
                 Console.WriteLine("Do you want to (s)tart the game or (e)xit?");
                 Achoice = Console.ReadLine();
-                if (choice == "s")
+                if (Achoice == "s")
                 {
-                    //TODO : Start the game 
+                    //TODO : Start the game
+                    Console.WriteLine("Calling function ConnectToServer");
+                    arena.ConnectToServer(player);
+
                 }
             } while (Achoice != "e");
         }
